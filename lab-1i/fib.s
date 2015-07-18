@@ -19,6 +19,22 @@ fibonacci:
 	@ Compare R4 wtih 1
 	@ If R4 == 1 goto .L4 (which returns 1)
 
+	cmp r0, #1
+	beq .L4
+	blt .L3
+
+	mov r4, r0	@i=N
+	mov r1, #0	@a=0
+	mov r2, #1	@b=1
+fib_forloop:
+	add r0, r1, r2	@sum=a+b
+	mov r1, r2	@a=b
+	mov r2, r0	@b=sum
+	sub r4, r4, #1	@i--
+	cmp r4, #1
+	bgt fib_forloop	@if (i>1) goto fib_forloop
+
+
 	@ R0 = R4 - 1
 	@ Recursive call to fibonacci with R4 - 1 as parameter
 
